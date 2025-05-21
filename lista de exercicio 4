@@ -1,0 +1,51 @@
+#include <iostream>
+using namespace std;
+
+struct Pilha {
+    int valor;
+    Pilha* prox;
+};
+
+Pilha* push(Pilha* topo, int valor) {
+    Pilha* novo = new Pilha;
+    novo->valor = valor;
+    novo->prox = topo;
+    return novo;
+}
+
+Pilha* pop(Pilha* topo) {
+    if (topo == nullptr) return nullptr;
+
+    Pilha* temp = topo;
+    topo = topo->prox;
+    delete temp;
+    return topo;
+}
+
+void imprimir(Pilha* topo) {
+    cout << "Topo da pilha:" << endl;
+    while (topo != nullptr) {
+        cout << topo->valor << endl;
+        topo = topo->prox;
+    }
+    cout << "-----" << endl;
+}
+
+int main() {
+    Pilha* pilha = nullptr;
+
+    pilha = push(pilha, 10);
+    pilha = push(pilha, 20);
+    pilha = push(pilha, 30);
+
+    imprimir(pilha); 
+
+    pilha = pop(pilha); 
+    imprimir(pilha);    
+    
+    while (pilha != nullptr) {
+        pilha = pop(pilha);
+    }
+
+    return 0;
+}
