@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std;
+
+
+struct No {
+    int valor;
+    No* prox;
+};
+
+void imprimir(No* inicio) {
+    No* atual = inicio;
+    while (atual != nullptr) {
+        cout << atual->valor << " -> ";
+        atual = atual->prox;
+    }
+    cout << "NULL" << endl;
+}
+
+int main() {
+    
+    No* inicio = new No;
+    inicio->valor = 1;
+
+    
+    inicio->prox = new No;
+    inicio->prox->valor = 2;
+    inicio->prox->prox = nullptr;  
+
+  
+    imprimir(inicio);
+
+
+    delete inicio;
+
+    return 0;
+}
