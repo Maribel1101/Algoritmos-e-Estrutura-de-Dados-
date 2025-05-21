@@ -1,0 +1,67 @@
+#include <iostream>
+using namespace std;
+
+struct No {
+    int valor;
+    No* prox;
+};
+
+
+struct Fila {
+    No* inicio;
+    No* fim;
+};
+
+void enfileirar(Fila* f, int valor) {
+    No* novo = new No;  
+    novo->valor = valor;
+    novo->prox = nullptr;
+
+    if (f->fim != nullptr) {
+        f->fim->prox = novo;  
+    }
+    f->fim = novo; 
+
+    if (f->inicio == nullptr) {
+        f->inicio = novo;  
+    }
+}
+
+void desenfileirar(Fila* f) {
+    if (f->inicio != nullptr) {
+        No* temp = f->inicio;
+        f->inicio = f->inicio->prox;
+
+        if (f->inicio == nullptr) {
+            f->fim = nullptr;  
+        }
+
+        delete temp;  
+    }
+}
+
+void imprimir(Fila* f) {
+    No* atual = f->inicio;
+    cout << "Fila: ";
+    while (atual != nullptr) {
+        cout << atual->valor << " ";
+        atual = atual->prox;
+    }
+    cout << endl;
+}
+
+int main() {
+    Fila f = {nullptr, nullptr};  
+
+    enfileirar(&f, 5);
+    enfileirar(&f, 10);
+    enfileirar(&f, 15);
+
+    imprimir(&f);
+
+    desenfileirar(&f);
+
+    imprimir(&f);
+
+    return 0;
+}
